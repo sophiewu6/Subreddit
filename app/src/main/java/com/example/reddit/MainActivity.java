@@ -8,11 +8,14 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Button button;
+    static StoreInfo store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        store = new StoreInfo();
 
         button = (Button) findViewById(R.id.button);
 
@@ -24,4 +27,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    static public String getSubreddit() {
+        return store.getSubreddit();
+    }
+
+    static public int getPost() {
+        return store.getPost();
+    }
+
+    static public void setSubreddit(String subreddit) {
+        store.setSubreddit(subreddit);
+    }
+
+    static public void setPost(int post) {
+        store.setPost(post);
+    }
+
 }

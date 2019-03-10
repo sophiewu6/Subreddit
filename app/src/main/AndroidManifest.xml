@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".write_thread"></activity>
+        <activity android:name=".WriteThread"></activity>
         <activity android:name=".Thread" />
         <activity android:name=".Subreddit" />
         <activity android:name=".SubredditList" />

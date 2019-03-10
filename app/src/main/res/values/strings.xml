@@ -2,4 +2,13 @@
     <string name="app_name">Reddit</string>
     <string name="title_activity_subreddit_list">Subreddit_list</string>
     <string name="title_activity_create_subreddit">create_subreddit</string>
+
+    <string-array name="subreddits">
+        <item>UCI</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>abc</item>
+    </string-array>
+
 </resources>

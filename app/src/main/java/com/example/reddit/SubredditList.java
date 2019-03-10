@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -20,6 +21,10 @@ public class SubredditList extends AppCompatActivity {
 
         button = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         listView = (ListView) findViewById(R.id.listView);
+
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(SubredditList.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.subreddits));
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,5 +41,6 @@ public class SubredditList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        listView.setAdapter(mAdapter);
     }
 }

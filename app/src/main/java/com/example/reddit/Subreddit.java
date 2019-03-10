@@ -20,8 +20,8 @@ public class Subreddit extends AppCompatActivity {
         setContentView(R.layout.activity_subreddit);
 
         mThreads = new ArrayList<Post>();
-        mThreads.add(new Post("title1", 0, 0));
-        mThreads.add(new Post("title2", 0, 0));
+        mThreads.add(new Post("title1", "",0, 0));
+        mThreads.add(new Post("title2", "", 0, 0));
 
         recyclerView = findViewById(R.id.recyclerView);
 

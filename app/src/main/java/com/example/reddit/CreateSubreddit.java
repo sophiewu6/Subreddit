@@ -31,7 +31,8 @@ public class CreateSubreddit extends AppCompatActivity {
             public void onClick(View v) {
                 String title = get_title.getText().toString();
                 String desc = get_desc.getText().toString();
-                mDatabase.child("Subreddit List").setValue(desc);
+                SubredditObject sub = new SubredditObject(title, desc);
+                mDatabase.child("Subreddit List").child(sub.getTitle()).setValue(sub);
                 Intent intent = new Intent(CreateSubreddit.this, SubredditList.class);
                 startActivity(intent);
 

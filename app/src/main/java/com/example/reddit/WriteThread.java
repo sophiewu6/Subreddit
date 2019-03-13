@@ -33,17 +33,17 @@ public class WriteThread extends AppCompatActivity {
 
 
 
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = get_title.getText().toString();
                 String text = get_text.getText().toString();
-                Post new_post = new Post(title, text, 0, 0);
-                mDatabase.child("Subreddit List").child(sub.getTitle()).setValue(sub);
-                Intent intent = new Intent(CreateSubreddit.this, SubredditList.class);
+                Post new_post = new Post(title, text, 0, 0, 0 );
+                mDatabase.child("Subreddit List").child(MainActivity.getSubreddit().getTitle()).setValue(new_post.getKey());
+                Intent intent = new Intent(WriteThread.this, Subreddit.class);
                 startActivity(intent);
 
             }
-        });*/
+        });
     }
 }

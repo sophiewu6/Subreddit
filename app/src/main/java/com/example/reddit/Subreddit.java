@@ -35,8 +35,8 @@ public class Subreddit extends AppCompatActivity {
         get_desc.setText(MainActivity.store.getSubreddit().getDescription());
 
         mThreads = new ArrayList<Post>();
-        mThreads.add(new Post("title1", "",0, 0, 0));
-        mThreads.add(new Post("title2", "", 0, 0, 0));
+        mThreads.add(new Post("title1", "",0, 0, ""));
+        mThreads.add(new Post("title2", "", 0, 0, ""));
 
         recyclerView = findViewById(R.id.recyclerView);
 

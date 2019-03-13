@@ -1,19 +1,22 @@
 package com.example.reddit;
 
+import java.util.UUID;
+
 public class Post {
 
     private String title;
     private String text;
     private int upvotes;
     private int comments;
-    private int key;
+    private String key;
 
-    public Post(String title, String text, int upvotes, int comments, int key) {
+    public Post(String title, String text, int upvotes, int comments, String key) {
         this.title = title;
         this.text = text;
         this.upvotes = upvotes;
         this.comments = comments;
-        this.key = key;
+        this.key = UUID.randomUUID().toString();
+
     }
 
     public String getTitle() {
@@ -22,7 +25,7 @@ public class Post {
 
     public String getText() { return text; }
 
-    public int getKey() { return key; }
+    public String getKey() { return key; }
 
     public int getUpvotes() {
         return upvotes;

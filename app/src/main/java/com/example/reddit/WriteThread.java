@@ -18,7 +18,7 @@ public class WriteThread extends AppCompatActivity {
     Button button;
     EditText get_title;
     EditText get_text;
-    int test = MainActivity.getTest();
+    //int test = MainActivity.getTest();
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -33,7 +33,7 @@ public class WriteThread extends AppCompatActivity {
 
 
 
-        button.setOnClickListener(new View.OnClickListener() {
+        /*button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = get_title.getText().toString();
@@ -44,6 +44,6 @@ public class WriteThread extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        });
+        });*/
     }
 }

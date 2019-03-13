@@ -10,6 +10,14 @@ public class Post {
     private int comments;
     private String key;
 
+    public Post() {
+        this.title = "";
+        this.text = "";
+        this.upvotes = 0;
+        this.comments = 0;
+        this.key = "";
+    }
+
     public Post(String title, String text, int upvotes, int comments, String key) {
         this.title = title;
         this.text = text;
@@ -33,5 +41,9 @@ public class Post {
 
     public int getComments() {
         return comments;
+    }
+
+    public String toString() {
+        return key;
     }
 }

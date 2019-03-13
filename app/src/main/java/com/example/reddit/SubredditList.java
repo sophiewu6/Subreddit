@@ -28,6 +28,7 @@ public class SubredditList extends AppCompatActivity {
     ListView listView;
     private ChildEventListener childEventListener;
     ArrayAdapter<SubredditObject> mAdapter;
+    ArrayList<SubredditObject> subredditList = new ArrayList<SubredditObject>();
 
 
     @Override
@@ -38,7 +39,7 @@ public class SubredditList extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Subreddit List");
 
-        ArrayList<SubredditObject> subredditList = new ArrayList<SubredditObject>();
+
 
         childEventListener = new ChildEventListener() {
             @Override
@@ -86,6 +87,7 @@ public class SubredditList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(SubredditList.this, Subreddit.class);
+                MainActivity.store.setSubreddit(subredditList.get(position));
                 startActivity(intent);
             }
         });

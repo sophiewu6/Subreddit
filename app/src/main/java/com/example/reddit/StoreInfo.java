@@ -1,15 +1,14 @@
 package com.example.reddit;
 
 public class StoreInfo {
-    private String subreddit;
+    private SubredditObject subreddit;
     private int post;
 
     public StoreInfo() {
-        this.subreddit = "";
         this.post = 0;
     }
 
-    public String getSubreddit() {
+    public SubredditObject getSubreddit() {
         return subreddit;
     }
 
@@ -17,7 +16,7 @@ public class StoreInfo {
         return post;
     }
 
-    public void setSubreddit(String subreddit) {
+    public void setSubreddit(SubredditObject subreddit) {
         this.subreddit = subreddit;
     }
 

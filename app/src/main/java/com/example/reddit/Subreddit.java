@@ -5,19 +5,34 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class Subreddit extends AppCompatActivity {
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     ArrayList<Post> mThreads;
+    TextView get_title;
+    TextView get_desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subreddit);
+
+        get_title = (TextView) findViewById(R.id.textView);
+        get_desc = (TextView) findViewById(R.id.textView4);
+        get_title.setText(MainActivity.store.getSubreddit().getTitle());
+        get_desc.setText(MainActivity.store.getSubreddit().getDescription());
 
         mThreads = new ArrayList<Post>();
         mThreads.add(new Post("title1", "",0, 0, 0));

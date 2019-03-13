@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    static public String getSubreddit() {
+    static public SubredditObject getSubreddit() {
         return store.getSubreddit();
     }
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         return store.getPost();
     }
 
-    static public void setSubreddit(String subreddit) {
+    static public void setSubreddit(SubredditObject subreddit) {
         store.setSubreddit(subreddit);
     }
 

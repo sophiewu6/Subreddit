@@ -1,5 +1,6 @@
 package com.example.reddit;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +12,18 @@ import java.util.ArrayList;
 
 class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<ThreadAdapter.ViewHolder> {
     ArrayList<Post> mThreads;
+    public MyAdapterListener onClickListener;
 
-    public ThreadAdapter(ArrayList<Post> threads) {
+    public interface MyAdapterListener {
+
+        void iconTextViewOnClick(View v, int position);
+        void iconImageViewOnClick(View v, int position);
+    }
+
+
+    public ThreadAdapter(ArrayList<Post> threads, MyAdapterListener listener) {
         mThreads = threads;
+        onClickListener = listener;
     }
 
     @Override
@@ -39,6 +49,13 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
+
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+               public void onClick(View v) {
+                   onClickListener.iconTextViewOnClick(v, getAdapterPosition());
+                }
+            });
         }
     }
 }

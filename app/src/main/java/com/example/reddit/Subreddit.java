@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Subreddit extends AppCompatActivity {
     private FirebaseDatabase database;
@@ -54,9 +56,7 @@ public class Subreddit extends AppCompatActivity {
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                System.out.println
-                if (dataSnapshot.getValue() == Post.class) {
-                    System.out.println("1");
+                if (dataSnapshot.getValue().getClass() == HashMap.class) {
                     mThreads.add(dataSnapshot.getValue(Post.class)); }
                 mAdapter.notifyItemInserted(mThreads.size()-1);
             }
@@ -90,7 +90,17 @@ public class Subreddit extends AppCompatActivity {
         RecyclerView.LayoutManager rvLayoutManager = layoutManager;
 
         recyclerView.setLayoutManager(rvLayoutManager);
-        mAdapter = new ThreadAdapter(mThreads);
+        mAdapter = new ThreadAdapter(mThreads, new ThreadAdapter.MyAdapterListener() {
+            public void iconTextViewOnClick(View v, int position) {
+                Intent intent = new Intent(Subreddit.this, Thread.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void iconImageViewOnClick(View v, int position) {
+
+            }
+        });
         recyclerView.setAdapter((mAdapter));
 
         button.setOnClickListener(new View.OnClickListener() {

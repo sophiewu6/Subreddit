@@ -38,8 +38,8 @@ public class WriteThread extends AppCompatActivity {
             public void onClick(View v) {
                 String title = get_title.getText().toString();
                 String text = get_text.getText().toString();
-                Post new_post = new Post(title, text, 0, 0, 0 );
-                mDatabase.child("Subreddit List").child(MainActivity.getSubreddit().getTitle()).setValue(new_post.getKey());
+                Post new_post = new Post(title, text, 0, 0,"" );
+                mDatabase.child("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child(new_post.getKey()).setValue(new_post);
                 Intent intent = new Intent(WriteThread.this, Subreddit.class);
                 startActivity(intent);
 

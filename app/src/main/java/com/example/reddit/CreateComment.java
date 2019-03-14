@@ -34,7 +34,7 @@ public class CreateComment extends AppCompatActivity {
                 String text = comment_text.getText().toString();
                 new_comment = new Comment(text,0, "");
                 Intent intent = new Intent(CreateComment.this, Thread.class);
-                mDatabase.child("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child(MainActivity.getPost().getKey()).child(new_comment.getKey()).setValue(new_comment);
+                mDatabase.child("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child("Thread List").child(MainActivity.getPost().getKey()).child("Comment List").child(new_comment.getKey()).setValue(new_comment);
                 startActivity(intent);
             }
         });

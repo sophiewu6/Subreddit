@@ -42,7 +42,7 @@ public class Subreddit extends AppCompatActivity {
         setContentView(R.layout.activity_subreddit);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Subreddit List").child(MainActivity.getSubreddit().getTitle());
+        myRef = database.getReference("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child("Thread List");
 
         get_title = (TextView) findViewById(R.id.textView);
         get_desc = (TextView) findViewById(R.id.textView4);
@@ -56,8 +56,8 @@ public class Subreddit extends AppCompatActivity {
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (dataSnapshot.getValue().getClass() == HashMap.class) {
-                    mThreads.add(dataSnapshot.getValue(Post.class)); }
+                //if (dataSnapshot.getValue().getClass() == HashMap.class) {
+                mThreads.add(dataSnapshot.getValue(Post.class)); //}
                 mAdapter.notifyItemInserted(mThreads.size()-1);
             }
 

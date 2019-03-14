@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         return store.getSubreddit();
     }
 
-    static public int getPost() {
+    static public Post getPost() {
         return store.getPost();
     }
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         store.setSubreddit(subreddit);
     }
 
-    static public void setPost(int post) {
+    static public void setPost(Post post) {
         store.setPost(post);
     }
 

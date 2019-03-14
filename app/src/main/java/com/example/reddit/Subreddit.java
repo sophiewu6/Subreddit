@@ -93,6 +93,7 @@ public class Subreddit extends AppCompatActivity {
         mAdapter = new ThreadAdapter(mThreads, new ThreadAdapter.MyAdapterListener() {
             public void iconTextViewOnClick(View v, int position) {
                 Intent intent = new Intent(Subreddit.this, Thread.class);
+                MainActivity.store.setPost(mThreads.get(position));
                 startActivity(intent);
             }
 

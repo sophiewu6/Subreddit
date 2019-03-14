@@ -15,7 +15,7 @@ public class Post {
         this.text = "";
         this.upvotes = 0;
         this.comments = 0;
-        this.key = "";
+        this.key = UUID.randomUUID().toString();
     }
 
     public Post(String title, String text, int upvotes, int comments, String key) {

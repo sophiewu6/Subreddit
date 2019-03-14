@@ -2,17 +2,16 @@ package com.example.reddit;
 
 public class StoreInfo {
     private SubredditObject subreddit;
-    private int post;
+    private Post post;
 
     public StoreInfo() {
-        this.post = 0;
     }
 
     public SubredditObject getSubreddit() {
         return subreddit;
     }
 
-    public int getPost() {
+    public Post getPost() {
         return post;
     }
 
@@ -20,7 +19,7 @@ public class StoreInfo {
         this.subreddit = subreddit;
     }
 
-    public void setPost(int post) {
+    public void setPost(Post post) {
         this.post = post;
     }
 }

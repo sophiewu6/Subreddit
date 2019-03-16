@@ -26,6 +26,7 @@ public class Thread extends AppCompatActivity {
     CommentAdapter mAdapter;
     ArrayList<Comment> mThreads;
     Button button;
+    Button backButton;
     TextView subreddit_name;
     TextView thread_title;
     TextView thread_info;
@@ -38,9 +39,11 @@ public class Thread extends AppCompatActivity {
         setContentView(R.layout.activity_thread);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child("Thread List").child(MainActivity.getPost().getKey()).child("Comment List");
+        myRef.orderByChild("upvotes");
         mThreads = new ArrayList<Comment>();
 
         button = findViewById(R.id.add_comment);
+        backButton = findViewById(R.id.back);
         subreddit_name = findViewById(R.id.subreddit);
         thread_title =findViewById(R.id.post_title);
         thread_info = findViewById(R.id.post_text);
@@ -62,7 +65,7 @@ public class Thread extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -89,7 +92,7 @@ public class Thread extends AppCompatActivity {
                 Comment currentComment = (Comment) mThreads.get(position);
                 myRef.child(currentComment.getKey()).removeValue();
                 mThreads.remove(currentComment);
-                refresh(currentComment.getKey());
+                //refresh(currentComment.getKey());
             }
 
             @Override
@@ -106,17 +109,13 @@ public class Thread extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    public void refresh(String update) {
-        mAdapter.clearComments();
-
-        for (Comment c: mThreads) {
-            if (c.getKey().equalsIgnoreCase(update)) {
-                mThreads.add(c);
-                mAdapter.notifyItemInserted(mThreads.size()-1);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Thread.this, Subreddit.class);
+                startActivity(intent);
             }
-        }
-        System.out.println(mThreads);
+        });
     }
 }

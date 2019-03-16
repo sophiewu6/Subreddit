@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateSubreddit extends AppCompatActivity {
     Button button;
+    Button backButton;
     EditText get_title;
     EditText get_desc;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -22,6 +23,7 @@ public class CreateSubreddit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_subreddit);
         button = (Button) findViewById(R.id.button2);
+        backButton = findViewById(R.id.back);
 
         get_title = (EditText) findViewById(R.id.subredditTitle);
         get_desc = (EditText) findViewById(R.id.subreddit_desc);
@@ -35,7 +37,14 @@ public class CreateSubreddit extends AppCompatActivity {
                 mDatabase.child("Subreddit List").child(sub.getTitle()).setValue(sub);
                 Intent intent = new Intent(CreateSubreddit.this, SubredditList.class);
                 startActivity(intent);
+            }
+        });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateSubreddit.this, SubredditList.class);
+                startActivity(intent);
             }
         });
 

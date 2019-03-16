@@ -17,6 +17,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -43,6 +44,8 @@
                 android:text="DELETE" />
 
                 <ImageButton
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:id="@+id/upvote"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -58,6 +61,8 @@
                     android:text="1" />
 
                 <ImageButton
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:id="@+id/downvote"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

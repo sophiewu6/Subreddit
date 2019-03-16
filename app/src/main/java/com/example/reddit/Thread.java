@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Thread extends AppCompatActivity {
     private FirebaseDatabase database;
@@ -56,6 +57,7 @@ public class Thread extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 mThreads.add(dataSnapshot.getValue(Comment.class));
+                Collections.sort(mThreads);
                 mAdapter.notifyItemInserted(mThreads.size()-1);
             }
 
@@ -89,7 +91,7 @@ public class Thread extends AppCompatActivity {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         mAdapter = new CommentAdapter(mThreads, new CommentAdapter.MyAdapterListener() {
-            public void commentTextViewOnClick(View v, int position){
+            public void commentTextViewOnClick(View v, int position) {
 
             }
             public void deleteButtonOnClick(View v, int position) {

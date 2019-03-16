@@ -67,7 +67,7 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
             score = (TextView) itemView.findViewById(R.id.score);
             this.upvote = itemView.findViewById(R.id.upvote);
             downvote = itemView.findViewById(R.id.downvote);
-            comment = (TextView) itemView.findViewById(R.id.title);
+            comment = (TextView) itemView.findViewById(R.id.comment);
             deleteButton = (Button) itemView.findViewById(R.id.delete);
 
 

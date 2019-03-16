@@ -2,7 +2,7 @@ package com.example.reddit;
 
 import java.util.UUID;
 
-public class Comment {
+public class Comment implements Comparable<Comment>{
 
     private String text;
     private int upvotes;
@@ -37,5 +37,10 @@ public class Comment {
 
     public int getUpvotes() {
         return upvotes;
+    }
+
+    @Override
+    public int compareTo(Comment c) {
+        return c.getUpvotes() - upvotes;
     }
 }

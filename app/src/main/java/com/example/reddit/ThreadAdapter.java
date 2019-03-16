@@ -39,7 +39,7 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
     @Override
     public void onBindViewHolder(@NonNull ThreadAdapter.ViewHolder viewHolder, int i) {
         viewHolder.title.setText(mThreads.get(i).getTitle());
-        viewHolder.score.setText(mThreads.get(i).getUpvotes());
+        viewHolder.score.setText(mThreads.get(i).getUpvotes()+"");
     }
 
     @Override

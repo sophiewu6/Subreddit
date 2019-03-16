@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Subreddit extends AppCompatActivity {
@@ -33,6 +35,7 @@ public class Subreddit extends AppCompatActivity {
     TextView get_title;
     TextView get_desc;
     FloatingActionButton button;
+    Button backButton;
     private ChildEventListener childEventListener;
 
     @Override
@@ -50,6 +53,7 @@ public class Subreddit extends AppCompatActivity {
         get_desc.setText(MainActivity.store.getSubreddit().getDescription());
 
         button = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        backButton = findViewById(R.id.back);
 
         mThreads = new ArrayList<Post>();
 
@@ -58,6 +62,7 @@ public class Subreddit extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //if (dataSnapshot.getValue().getClass() == HashMap.class) {
                 mThreads.add(dataSnapshot.getValue(Post.class)); //}
+                Collections.sort(mThreads);
                 mAdapter.notifyItemInserted(mThreads.size()-1);
             }
 
@@ -68,12 +73,12 @@ public class Subreddit extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -110,6 +115,13 @@ public class Subreddit extends AppCompatActivity {
                 MainActivity.getPost().downvote();
                 myRef.child(MainActivity.getPost().getKey()).child("upvotes").setValue(MainActivity.getPost().getUpvotes());
             }
+
+            public void deleteButtonOnClick(View v, int position) {
+                Post currentPost = (Post) mThreads.get(position);
+                myRef.child(currentPost.getKey()).removeValue();
+                mThreads.remove(currentPost);
+                //refresh(currentComment.getKey());
+            }
         });
         recyclerView.setAdapter((mAdapter));
 
@@ -117,6 +129,14 @@ public class Subreddit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Subreddit.this, WriteThread.class);
+                startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Subreddit.this, SubredditList.class);
                 startActivity(intent);
             }
         });

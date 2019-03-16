@@ -25,4 +25,5 @@ public class SubredditObject {
     public String toString() {
         return title;
     }
+
 }

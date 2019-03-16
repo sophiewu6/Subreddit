@@ -14,9 +14,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateComment extends AppCompatActivity {
     Button button;
+    Button backButton;
     TextView post_title;
     EditText comment_text;
     Comment new_comment;
+
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class CreateComment extends AppCompatActivity {
         this.comment_text = findViewById(R.id.comment_text);
 
         button = findViewById(R.id.send);
+        backButton = findViewById(R.id.back);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,14 @@ public class CreateComment extends AppCompatActivity {
                 new_comment = new Comment(text,0, "");
                 Intent intent = new Intent(CreateComment.this, Thread.class);
                 mDatabase.child("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child("Thread List").child(MainActivity.getPost().getKey()).child("Comment List").child(new_comment.getKey()).setValue(new_comment);
+                startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateComment.this, Thread.class);
                 startActivity(intent);
             }
         });

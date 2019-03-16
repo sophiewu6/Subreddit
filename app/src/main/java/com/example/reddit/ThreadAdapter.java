@@ -22,6 +22,7 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
         void upvoteImageViewOnClick(View v, int position);
         void downvoteImageViewOnClick(View v, int position);
         void titleTextViewOnClick(View v, int position);
+        void deleteButtonOnClick(View v, int position);
     }
 
 
@@ -53,6 +54,7 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
         public ImageButton upvote;
         public ImageButton downvote;
         public TextView score;
+        public Button deleteButton;
 
 
         public ViewHolder(View itemView) {
@@ -61,6 +63,7 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
             score = (TextView) itemView.findViewById(R.id.score);
             this.upvote = itemView.findViewById(R.id.upvote);
             downvote = itemView.findViewById(R.id.downvote);
+            deleteButton = itemView.findViewById(R.id.delete);
 
 
             title.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +84,12 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
                 @Override
                 public void onClick(View v) {
                     onClickListener.downvoteImageViewOnClick(v, getAdapterPosition());
+                }
+            });
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onClickListener.deleteButtonOnClick(v, getAdapterPosition());
                 }
             });
 

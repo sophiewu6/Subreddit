@@ -101,14 +101,14 @@ public class Subreddit extends AppCompatActivity {
             public void upvoteImageViewOnClick(View v, int position) {
                 MainActivity.store.setPost(mThreads.get(position));
                 MainActivity.getPost().upvote();
-                myRef.child(MainActivity.getPost().getKey()).setValue(MainActivity.getPost());
+                myRef.child(MainActivity.getPost().getKey()).child("upvotes").setValue(MainActivity.getPost().getUpvotes());
 
             }
             @Override
             public void downvoteImageViewOnClick(View v, int position) {
                 MainActivity.store.setPost(mThreads.get(position));
                 MainActivity.getPost().downvote();
-                myRef.child(MainActivity.getPost().getKey()).setValue(MainActivity.getPost());
+                myRef.child(MainActivity.getPost().getKey()).child("upvotes").setValue(MainActivity.getPost().getUpvotes());
             }
         });
         recyclerView.setAdapter((mAdapter));

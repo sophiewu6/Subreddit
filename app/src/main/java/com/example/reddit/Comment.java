@@ -9,7 +9,7 @@ public class Comment {
     private String key;
 
     public Comment() {
-        this.text = "";
+        this.text = "chicken nugget";
         this.upvotes = 0;
         this.key = UUID.randomUUID().toString();
     }
@@ -18,6 +18,14 @@ public class Comment {
         this.text = text;
         this.upvotes = upvotes;
         this.key = UUID.randomUUID().toString();
+    }
+
+    public void upvote() {
+        upvotes++;
+    }
+
+    public void downvote() {
+        upvotes--;
     }
 
     public String getText() {

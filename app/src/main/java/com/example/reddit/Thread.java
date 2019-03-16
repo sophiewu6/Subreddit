@@ -38,7 +38,6 @@ public class Thread extends AppCompatActivity {
         setContentView(R.layout.activity_thread);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Subreddit List").child(MainActivity.getSubreddit().getTitle()).child("Thread List").child(MainActivity.getPost().getKey()).child("Comment List");
-        mThreads = new ArrayList<Comment>();
 
         button = findViewById(R.id.add_comment);
         subreddit_name = findViewById(R.id.subreddit);
@@ -47,6 +46,8 @@ public class Thread extends AppCompatActivity {
         subreddit_name.setText(MainActivity.store.getSubreddit().getTitle());
         thread_title.setText(MainActivity.store.getPost().getTitle());
         thread_info.setText(MainActivity.store.getPost().getText());
+        mThreads = new ArrayList<Comment>();
+
 
         childEventListener = new ChildEventListener() {
             @Override
@@ -57,7 +58,7 @@ public class Thread extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -85,13 +86,23 @@ public class Thread extends AppCompatActivity {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         mAdapter = new CommentAdapter(mThreads, new CommentAdapter.MyAdapterListener() {
-            public void iconTextViewOnClick(View v, int position) {
-
+            public void commentTextViewOnClick(View v, int position) {
             }
 
             @Override
-            public void iconImageViewOnClick(View v, int position) {
+            public void upvoteImageViewOnClick(View v, int position) {
+                Comment a = mThreads.get(position);
+                System.out.println(a.getUpvotes());
+                System.out.println(position);
+                a.upvote();
+                myRef.child(a.getKey()).child("upvotes").setValue(a.getUpvotes());
 
+            }
+            @Override
+            public void downvoteImageViewOnClick(View v, int position) {
+                Comment a= mThreads.get(position);
+                a.downvote();
+                myRef.child(a.getKey()).child("upvotes").setValue(a.getUpvotes());
             }
         });
         recyclerView.setAdapter((mAdapter));

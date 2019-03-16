@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,9 +15,9 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
     public MyAdapterListener onClickListener;
 
     public interface MyAdapterListener {
-
-        void iconTextViewOnClick(View v, int position);
-        void iconImageViewOnClick(View v, int position);
+        void upvoteImageViewOnClick(View v, int position);
+        void downvoteImageViewOnClick(View v, int position);
+        void commentTextViewOnClick(View v, int position);
     }
 
 
@@ -33,7 +34,8 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.title.setText(mThreads.get(i).getText());
+        viewHolder.comment.setText(mThreads.get(i).getText());
+        viewHolder.score.setText(mThreads.get(i).getUpvotes()+"");
     }
 
     @Override
@@ -43,18 +45,39 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title;
+        public TextView comment;
+        public ImageButton upvote;
+        public ImageButton downvote;
+        public TextView score;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
+            score = (TextView) itemView.findViewById(R.id.score);
+            this.upvote = itemView.findViewById(R.id.upvote);
+            downvote = itemView.findViewById(R.id.downvote);
+            comment = (TextView) itemView.findViewById(R.id.title);
 
-            title.setOnClickListener(new View.OnClickListener() {
+            comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListener.iconTextViewOnClick(v, getAdapterPosition());
+                    onClickListener.commentTextViewOnClick(v, getAdapterPosition());
                 }
             });
+
+            upvote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.upvoteImageViewOnClick(v, getAdapterPosition());
+                }
+            });
+
+            downvote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.downvoteImageViewOnClick(v, getAdapterPosition());
+                }
+            });
+
         }
     }
 }

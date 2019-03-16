@@ -6,18 +6,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<ThreadAdapter.ViewHolder> {
     ArrayList<Post> mThreads;
+
     public MyAdapterListener onClickListener;
 
     public interface MyAdapterListener {
 
-        void iconTextViewOnClick(View v, int position);
-        void iconImageViewOnClick(View v, int position);
+        void upvoteImageViewOnClick(View v, int position);
+        void downvoteImageViewOnClick(View v, int position);
+        void titleTextViewOnClick(View v, int position);
     }
 
 
@@ -35,6 +39,7 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
     @Override
     public void onBindViewHolder(@NonNull ThreadAdapter.ViewHolder viewHolder, int i) {
         viewHolder.title.setText(mThreads.get(i).getTitle());
+        viewHolder.score.setText(mThreads.get(i).getUpvotes());
     }
 
     @Override
@@ -45,17 +50,40 @@ class ThreadAdapter extends android.support.v7.widget.RecyclerView.Adapter<Threa
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title;
+        public ImageButton upvote;
+        public ImageButton downvote;
+        public TextView score;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
+            score = (TextView) itemView.findViewById(R.id.score);
+            this.upvote = itemView.findViewById(R.id.upvote);
+            downvote = itemView.findViewById(R.id.downvote);
+
 
             title.setOnClickListener(new View.OnClickListener() {
                 @Override
                public void onClick(View v) {
-                   onClickListener.iconTextViewOnClick(v, getAdapterPosition());
+                   onClickListener.titleTextViewOnClick(v, getAdapterPosition());
                 }
             });
+
+            upvote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.upvoteImageViewOnClick(v, getAdapterPosition());
+                }
+            });
+
+            downvote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.downvoteImageViewOnClick(v, getAdapterPosition());
+                }
+            });
+
         }
     }
 }

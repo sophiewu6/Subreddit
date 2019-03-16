@@ -63,7 +63,7 @@ public class Subreddit extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+               mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -91,15 +91,24 @@ public class Subreddit extends AppCompatActivity {
 
         recyclerView.setLayoutManager(rvLayoutManager);
         mAdapter = new ThreadAdapter(mThreads, new ThreadAdapter.MyAdapterListener() {
-            public void iconTextViewOnClick(View v, int position) {
+            public void titleTextViewOnClick(View v, int position) {
                 Intent intent = new Intent(Subreddit.this, Thread.class);
                 MainActivity.store.setPost(mThreads.get(position));
                 startActivity(intent);
             }
 
             @Override
-            public void iconImageViewOnClick(View v, int position) {
+            public void upvoteImageViewOnClick(View v, int position) {
+                MainActivity.store.setPost(mThreads.get(position));
+                MainActivity.getPost().upvote();
+                myRef.child(MainActivity.getPost().getKey()).setValue(MainActivity.getPost());
 
+            }
+            @Override
+            public void downvoteImageViewOnClick(View v, int position) {
+                MainActivity.store.setPost(mThreads.get(position));
+                MainActivity.getPost().downvote();
+                myRef.child(MainActivity.getPost().getKey()).setValue(MainActivity.getPost());
             }
         });
         recyclerView.setAdapter((mAdapter));

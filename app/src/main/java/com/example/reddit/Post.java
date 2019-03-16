@@ -35,8 +35,16 @@ public class Post {
 
     public String getKey() { return key; }
 
-    public int getUpvotes() {
-        return upvotes;
+    public String getUpvotes() {
+        return ""+upvotes;
+    }
+
+    public void upvote() {
+        upvotes++;
+    }
+
+    public void downvote() {
+        upvotes--;
     }
 
     public int getComments() {

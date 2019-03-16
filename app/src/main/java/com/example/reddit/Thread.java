@@ -29,6 +29,7 @@ public class Thread extends AppCompatActivity {
     TextView subreddit_name;
     TextView thread_title;
     TextView thread_info;
+    TextView score;
     private ChildEventListener childEventListener;
 
     @Override

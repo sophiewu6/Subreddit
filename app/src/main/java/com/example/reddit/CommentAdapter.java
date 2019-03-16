@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
 
     public interface MyAdapterListener {
 
-        void iconTextViewOnClick(View v, int position);
+        void deleteButtonOnClick(View v, int position);
         void iconImageViewOnClick(View v, int position);
     }
 
@@ -25,15 +26,21 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
         onClickListener = listener;
     }
 
+    public void clearComments() {
+        int size = this.mThreads.size();
+        this.mThreads.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comment_view, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.title.setText(mThreads.get(i).getText());
+        viewHolder.comment.setText(mThreads.get(i).getText());
     }
 
     @Override
@@ -41,18 +48,21 @@ class CommentAdapter extends android.support.v7.widget.RecyclerView.Adapter<Comm
         return mThreads.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title;
+        public TextView comment;
+        public Button deleteButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
+            comment = (TextView) itemView.findViewById(R.id.comment);
+            deleteButton = (Button) itemView.findViewById(R.id.delete);
 
-            title.setOnClickListener(new View.OnClickListener() {
+            deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickListener.iconTextViewOnClick(v, getAdapterPosition());
+                    onClickListener.deleteButtonOnClick(v, getAdapterPosition());
                 }
             });
         }

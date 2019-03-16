@@ -23,7 +23,7 @@ public class Thread extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     RecyclerView recyclerView;
-    RecyclerView.Adapter<CommentAdapter.ViewHolder> mAdapter;
+    CommentAdapter mAdapter;
     ArrayList<Comment> mThreads;
     Button button;
     TextView subreddit_name;
@@ -84,8 +84,11 @@ public class Thread extends AppCompatActivity {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         mAdapter = new CommentAdapter(mThreads, new CommentAdapter.MyAdapterListener() {
-            public void iconTextViewOnClick(View v, int position) {
-
+            public void deleteButtonOnClick(View v, int position) {
+                Comment currentComment = (Comment) mThreads.get(position);
+                myRef.child(currentComment.getKey()).removeValue();
+                mThreads.remove(currentComment);
+                refresh(currentComment.getKey());
             }
 
             @Override
@@ -102,5 +105,17 @@ public class Thread extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void refresh(String update) {
+        mAdapter.clearComments();
+
+        for (Comment c: mThreads) {
+            if (c.getKey().equalsIgnoreCase(update)) {
+                mThreads.add(c);
+                mAdapter.notifyItemInserted(mThreads.size()-1);
+            }
+        }
+        System.out.println(mThreads);
     }
 }
